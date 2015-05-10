@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+		<!--C3P0 -->
+        <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="hibernate.c3p0.timeout">120</property>
+        <!--c3p0将建一张名为Test的空表，并使用其自带的查询语句进行测试。如果定义了这个参数那么
+属性preferredTestQuery将被忽略。你不能在这张Test表上进行任何操作，它将只供c3p0测试
+使用。Default: null-->
+        <property name="automaticTestTable">Test</property>
+        <property name="hibernate.c3p0.max_statements">100</property>
+        <property name="hibernate.c3p0.acquire_increment">1</property>
+        <property name="hibernate.c3p0.testConnectionOnCheckout">true</property>
+        <property name="hibernate.c3p0.idleConnectionTestPeriod">18000</property>
+        <property name="hibernate.c3p0.maxIdleTime">25000</property>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+	
+	<!-- test 	-->
+	<property name="connection.url">jdbc:mysql://192.168.1.102:1206/db_yrys_test</property>
+	<property name="connection.username">yrys_name</property>
+	<property name="connection.password">524524524</property>
+	
+	<property name="hibernate.connection.autocommit">true</property>
+	<property name="connection.autoReconnect">true</property>
+	<property name="connection.autoReconnectForPools">true</property> 
+	<property name="connection.is-connection-validation-required">true</property>
+	
+	<property name="connection.driver_class">
+		com.mysql.jdbc.Driver
+	</property>
+	<property name="myeclipse.connection.profile">
+		com.mysql.jdbc.Driver
+	</property>
+	<property name="format_sql">true</property>
+	<!-- 
+	<property name="show_sql">true</property>
+	-->
+	<property name="current_session_context_class">thread</property>
+
+	<!-- 	-->
+	<mapping class="com.ccc.test.pojo.UserInfo" />
+
+	</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans    
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd    
+      http://www.springframework.org/schema/context    
+      http://www.springframework.org/schema/context/spring-context.xsd    
+      http://www.springframework.org/schema/mvc    
+      http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">  
+      
+    <!-- 配置数据源
+    <bean id="dataSource"  
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+        <property name="driverClassName" value="${dataSource.driverClassName}" />  
+        <property name="url" value="${dataSource.url}" />  
+        <property name="username" value="${dataSource.username}" />  
+        <property name="password" value="${dataSource.password}" />  
+    </bean>  
+  	 -->  
+    <!--  配置hibernate SessionFactory-->  
+    <bean id="sessionFactory"  
+        class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">  
+        <property name="hibernateProperties">  
+            <props>  
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>  
+                <prop key="hibernate.hbm2ddl.auto">update</prop>  
+                <prop key="hibernate.show_sql">true</prop>  
+                <prop key="hiberante.format_sql">true</prop>  
+            </props>  
+        </property>  
+        <property name="configLocations">  
+            <list>  
+                <value>  
+                    classpath*:config/hibernate.cfg.xml  
+                </value>  
+            </list>  
+        </property>  
+    </bean> 
+     
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">  
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>
+    
+    <!-- 事务管理器 -->  
+    <bean id="transactionManager"  
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager">  
+        <property name="sessionFactory" ref="sessionFactory"></property>  
+    </bean>  
+      
+    <!-- 事务代理类 -->  
+    <bean id="transactionBese"  
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"  
+        lazy-init="true" abstract="true">  
+        <property name="transactionManager" ref="transactionManager"></property>  
+        <property name="transactionAttributes">  
+            <props>  
+                <prop key="add*">PROPAGATION_REQUIRED,-Exception</prop>  
+                <prop key="update*">PROPAGATION_REQUIRED,-Exception</prop>  
+                <prop key="insert*">PROPAGATION_REQUIRED,-Exception</prop>  
+                <prop key="modify*">PROPAGATION_REQUIRED,-Exception</prop>  
+                <prop key="delete*">PROPAGATION_REQUIRED,-Exception</prop>  
+                <prop key="del*">PROPAGATION_REQUIRED,-Exception</prop>  
+                <prop key="get*">PROPAGATION_NEVER</prop>
+                <prop key="find*">PROPAGATION_NEVER</prop>  
+            </props>  
+        </property>  
+    </bean>
+    <!-- 配置DAO 
+    <bean id="userDaoTarget" class="com.ccc.test.hibernate.dao.impl.UserDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="userDaoProxy" parent="transactionBase" >  
+        <property name="target" ref="userDaoTarget" />   
+    </bean> 
+    -->
+  	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+</beans>

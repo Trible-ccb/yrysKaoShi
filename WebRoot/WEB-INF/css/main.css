@@ -1,0 +1,41 @@
+body{
+	background:  #f1f5f8 url(../img/bg.png) center 0 no-repeat
+}
+.content{
+	height: 520px;
+	width: 1366px;
+	
+}
+.reg_login_box{
+	
+	height: 500px;
+	width: 380px;
+	text-align: right;
+	margin-top: 60px;
+
+}
+
+.accordion_section{
+	text-align: left;
+}
+
+.reg_login_box input{
+	border-radius:5px;
+	height: 36px;
+	margin-bottom: 20px;
+	margin-right: 10px;
+	
+}
+input[type="submit"]{
+	width: 120px;
+	background: #80C3F7;
+}
+.login_box{
+	height: 100%;
+	width: 100%;
+}
+
+.reg_box{
+	height: 100%;
+	width: 100%;
+}
