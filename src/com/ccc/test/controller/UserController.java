@@ -1,28 +1,22 @@
 package com.ccc.test.controller;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ccc.test.pojo.UserInfo;
-import com.ccc.test.service.interfaces.IBaseService;
 import com.ccc.test.service.interfaces.IUserService;
 import com.ccc.test.utils.GlobalValues;
 import com.ccc.test.utils.ListUtil;
 import com.ccc.test.utils.SecurityMethod;
-import com.ccc.test.utils.StringUtil;
 
 //代表控制层
 @Controller
@@ -32,25 +26,6 @@ public class UserController {
 
 	@Autowired
 	IUserService userService;
-	
-	@RequestMapping("/addUser.do")
-	public String addUser(
-			String username,
-			String password,
-			Model model){
-		
-		UserInfo user = new UserInfo();
-		user.setPassword(password);
-		user.setUsername(username);
-		Serializable id = userService.add(user);
-		System.out.println("username = "+ username +" password = " + password + " id = " + id);
-		if ( id != null ){
-			model.addAttribute("uid", id);
-			return "redirect:/user/getAllUser.do";
-		} else {
-			return "fail";
-		}
-	}
 	
 	/**用户注册时调用
 	 * @param username
@@ -89,6 +64,15 @@ public class UserController {
 		}
 		return "main";
 	}
+	
+	
+	/**用户登录时调用
+	 * @param username
+	 * @param password
+	 * @param usertype
+	 * @param model 用于保存返回的数据，这里是保存用户对象
+	 * @return 返回页面名字字符串，如main.jsp页面对应的字符串是main
+	 */
 	@RequestMapping(value = "/login.do",method = RequestMethod.POST)
 	public String login(
 			String username,
@@ -97,25 +81,24 @@ public class UserController {
 			ModelMap model){
 		String tokenid = userService.login(username, password,usertype);
 		UserInfo user = userService.fetchUserInfo(tokenid);
-		model.addAttribute(GlobalValues.SESSION_USER,user);
 		if ( user == null ){
 			model.addAttribute("result", "用户名或密码错误");
 			return "main";
 		}
+		//addAttribute 值不能为空
+		model.addAttribute(GlobalValues.SESSION_USER,user);
 		return "userinfo";
 	}
 	
+	/**用户登出调用
+	 * @param user 登出前，保存在Session中的user
+	 * @param httpSession
+	 * @return
+	 */
 	@RequestMapping(value = "/loginOut.do",method = RequestMethod.POST)
 	public String logOut(
 			@ModelAttribute(GlobalValues.SESSION_USER)UserInfo user,
 			HttpSession httpSession){
 		return "main";
-	}
-	
-	@RequestMapping("/getAllUser.do")
-	public String getAllUser(Model model){
-		List<UserInfo> userlist = userService.getList(null);
-		model.addAttribute("userlist", userlist);
-		return "allUser";
 	}
 }
