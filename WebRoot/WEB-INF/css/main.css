@@ -11,7 +11,7 @@ body{
 	height: 500px;
 	width: 380px;
 	text-align: right;
-	margin-top: 60px;
+	margin-top: 40px;
 
 }
 
@@ -19,12 +19,14 @@ body{
 	text-align: left;
 }
 
-.reg_login_box input{
+.reg_login_box input,fieldset{
 	border-radius:5px;
 	height: 36px;
 	margin-bottom: 20px;
 	margin-right: 10px;
-	
+}
+fieldset select {
+      width: 90px;
 }
 input[type="submit"]{
 	width: 120px;

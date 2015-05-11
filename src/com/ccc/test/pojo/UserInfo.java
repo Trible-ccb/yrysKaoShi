@@ -2,34 +2,43 @@ package com.ccc.test.pojo;
 
 import java.io.Serializable;
 
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "userinfo")
+@Table(name = UserInfo.USERINFO_TABLE_NAME)
 public class UserInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	public static final String USERINFO_TABLE_NAME = "tb_userinfo";
+	public static final String USERINFO_COLUMN_ID = "uid";
+	public static final String USERINFO_COLUMN_USER_NAME = "username";
+	public static final String USERINFO_COLUMN_PASSWORD = "password";
+	public static final String USERINFO_COLUMN_TYPE = "usertype";
+	
+	
+	
 	@Id
 	@GenericGenerator(name = "generator", strategy = "increment")
 	@GeneratedValue(generator="generator")
-	@Column(name="uid")
+	@Column(name=USERINFO_COLUMN_ID)
 	private int id;
 	
-	@Column(name="username")
+	@Column(name=USERINFO_COLUMN_USER_NAME)
 	private String username;
 	
-	@Column(name="password")
+	@Column(name=USERINFO_COLUMN_PASSWORD)
 	private String password;
-
+	
+	@Column(name=USERINFO_COLUMN_TYPE)
+	private String type;
+	
 	public int getId() {
 		return id;
 	}
@@ -52,6 +61,14 @@ public class UserInfo implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	

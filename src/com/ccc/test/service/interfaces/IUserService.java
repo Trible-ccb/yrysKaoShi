@@ -4,15 +4,15 @@ import com.ccc.test.pojo.UserInfo;
 
 public interface IUserService extends IBaseService<UserInfo> {
 
-	
-	/**µÇÂ¼½Ó¿Ú
-	 * @return ·µ»Øtoken×Ö·û´®£¬ÓÃÓÚ¸ÃÓÃ»§µÄÆäËû²Ù×÷
+	/**ç™»å½•æ¥å£
+	 * @return è¿”å›tokenå­—ç¬¦ä¸²ï¼Œç”¨äºè¯¥ç”¨æˆ·çš„å…¶ä»–æ“ä½œ å¯ä»¥ç®€å•è¿”å›id
 	 */
-	String login(String username,String password);
+	String login(String username,String password,String type);
 	
-	/**¸ù¾İĞèÒª»ñÈ¡ÓÃ»§²¿·ÖĞÅÏ¢£¬²»°üÀ¨ÃÜÂëµÈÃô¸ĞĞÅÏ¢
-	 * @param token ÓÃ»§µÄtoken×Ö·û´®
-	 * @return ·µ»ØÓÃ»§Êı¾İ¶ÔÏó
+	/**æ ¹æ®éœ€è¦è·å–ç”¨æˆ·éƒ¨åˆ†ä¿¡æ¯ï¼Œä¸åŒ…æ‹¬å¯†ç ç­‰æ•æ„Ÿä¿¡æ¯
+	 * @param token ç”¨æˆ·çš„tokenå­—ç¬¦ä¸²
+	 * @return è¿”å›ç”¨æˆ·æ•°æ®å¯¹è±¡
 	 */
 	UserInfo fetchUserInfo(String token);
+	
 }

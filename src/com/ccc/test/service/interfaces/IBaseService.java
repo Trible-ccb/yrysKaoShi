@@ -2,42 +2,43 @@ package com.ccc.test.service.interfaces;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 public interface IBaseService <T>{
 
-	/**»ñÈ¡ÀàĞÍTµÄ¶ÔÏó
-	 * @param id ¶ÔÏóµÄid
-	 * @return TµÄÊµÀı
+	/**è·å–ç±»å‹Tçš„å¯¹è±¡
+	 * @param id å¯¹è±¡çš„id
+	 * @return Tçš„å®ä¾‹
 	 */
 	T getById(Serializable id);
 	
-	/**»ñÈ¡Ò»×éTµÄ¶ÔÏó
-	 * @param arg »ñÈ¡²ÎÊı
-	 * @return ·µ»ØÒ»×éT¶ÔÏó
+	/**è·å–ä¸€ç»„Tçš„å¯¹è±¡
+	 * @param arg è·å–å‚æ•°
+	 * @return è¿”å›ä¸€ç»„Tå¯¹è±¡
 	 */
-	List<T> getList(Object arg);
+	List<T> getList(Map<String, Object> args);
 	
-	/**É¾³ı¶ÔÏóT
-	 * @param t ÒªÉ¾³ıµÄ¶ÔÏó
-	 * @return É¾³ı³É¹¦·µ»Øtrue£¬·ñÔòfalse£»
+	/**åˆ é™¤å¯¹è±¡T
+	 * @param t è¦åˆ é™¤çš„å¯¹è±¡
+	 * @return åˆ é™¤æˆåŠŸè¿”å›trueï¼Œå¦åˆ™falseï¼›
 	 */
 	boolean delete(T t);
 	
-	/**É¾³ıµÄ¶ÔÏóÁĞ±í
-	 * @param list ÒªÉ¾³ıµÄ¶ÔÏóÁĞ±í
-	 * @return É¾³ı³É¹¦·µ»Øtrue£¬·ñÔòfalse£»
+	/**åˆ é™¤çš„å¯¹è±¡åˆ—è¡¨
+	 * @param list è¦åˆ é™¤çš„å¯¹è±¡åˆ—è¡¨
+	 * @return åˆ é™¤æˆåŠŸè¿”å›trueï¼Œå¦åˆ™falseï¼›
 	 */
 	boolean deleteAll(List<T> list);
 	
-	/**¸üĞÂ¶ÔÏó
-	 * @param t ĞèÒª¸üĞÂµÄ¶ÔÏó
-	 * @return ³É¹¦·µ»Øtrue£¬·ñÔòfalse£»
+	/**æ›´æ–°å¯¹è±¡
+	 * @param t éœ€è¦æ›´æ–°çš„å¯¹è±¡
+	 * @return æˆåŠŸè¿”å›trueï¼Œå¦åˆ™falseï¼›
 	 */
 	boolean update(T t);
 	
-	/**Ìí¼Ó¶ÔÏó
-	 * @param t ĞèÒªÌí¼ÓµÄ¶ÔÏó
-	 * @return ³É¹¦·µ»Ø¶ÔÏóid£¬·ñÔònull£»
+	/**æ·»åŠ å¯¹è±¡
+	 * @param t éœ€è¦æ·»åŠ çš„å¯¹è±¡
+	 * @return æˆåŠŸè¿”å›å¯¹è±¡idï¼Œå¦åˆ™nullï¼›
 	 */
 	Serializable add(T t);
 }

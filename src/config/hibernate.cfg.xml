@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC
-        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!DOCTYPE hibernate-configuration PUBLIC 
+         "-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+         "../webapps/yrysKaoShi/WEB-INF/classes/config/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
     <session-factory>
@@ -42,8 +42,8 @@
 	<property name="show_sql">true</property>
 	-->
 	<property name="current_session_context_class">thread</property>
-
-	<!-- 	-->
+	
+	<!-- 添加需要映射的类	-->
 	<mapping class="com.ccc.test.pojo.UserInfo" />
 
 	</session-factory>

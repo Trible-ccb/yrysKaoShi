@@ -26,7 +26,8 @@
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>  
                 <prop key="hibernate.hbm2ddl.auto">update</prop>  
                 <prop key="hibernate.show_sql">true</prop>  
-                <prop key="hiberante.format_sql">true</prop>  
+                <prop key="hiberante.format_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">none</prop>  
             </props>  
         </property>  
         <property name="configLocations">  

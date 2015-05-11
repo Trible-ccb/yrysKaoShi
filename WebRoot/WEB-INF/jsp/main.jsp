@@ -35,6 +35,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			at: "center center",
 			collision: "flip flip"
 		});
+		$( "#usertype" ).selectmenu();
+		var tips = $(".dialog p").val();
+		if (tips != ''){
+			$(".dialog").dialog();
+		}
  	  });
    </script>
   </head>
@@ -56,12 +61,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  		<label for="#login_password">密码:</label>
 					<input id="login_password" name="password" type="password"/>
 					<br/>
+					<fieldset>
+					    <label for="usertype">选择用户身份</label>
+					    <select name="usertype" id="usertype">
+					      <option>学生</option>
+					      <option>老师</option>
+					    </select>
+					</fieldset>
 					<input type="submit" value="登录" id="submit_login"/>
 			  	</form>
 			  </div>
 			  <h3 class="accordion_section">注册用户</h3>
 			  <div id="reg_tab">
-  			    <form action="user/add.do" method="post">
+  			    <form action="user/register.do" method="post">
   			    	<label for="#reg_username">用户名:</label>
 			  		<input id="reg_username" name="username" />
 			  		<br/>
@@ -69,12 +81,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input id="reg_password" name="password" type="password"/>
 					<br/>
 					<label for="#con_password">确认密码:</label>
-					<input id="con_password" name="password" type="password"/>
+					<input id="con_password" name="con_password" type="password"/>
 					<br/>
+					<fieldset>
+					    <label for="usertype">选择用户身份</label>
+					    <select name="usertype" id="usertype">
+					      <option>学生</option>
+					      <option>老师</option>
+					    </select>
+					</fieldset>
 					<input type="submit" value="注册" id="submit_reg"/>
 			  	</form>
 			  </div>
 			</div>
+		</div>
+		<div class="dialog" title="提示！">
+			<p>${result}</p>
 		</div>
 	</div>
 </body>

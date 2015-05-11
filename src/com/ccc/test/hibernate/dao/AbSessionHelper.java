@@ -8,18 +8,21 @@ import com.ccc.test.utils.Bog;
 
 /**
  * @author Trible Chen
- *Êı¾İ¿âSessionÊ¹ÓÃ¸¨ÖúÀà
+ *Session æ“ä½œè¾…åŠ©ç±»
  */
 	
 public abstract class AbSessionHelper <T> {
 
 	/**
 	 * @author Trible Chen
-	 *´¦ÀíSessionµÄ»Øµ÷½Ó¿Ú
-	 * @param <T> ½Ó¿Úº¯Êı·µ»ØÀàĞÍ
+	 *æ“ä½œæ•°æ®åº“ Sessionå›è°ƒå‡½æ•°
+	 * @param <T> 
 	 */
 	public abstract T handleSession(Session s);
 	
+	/**è·å–æ“ä½œSessionåçš„ç»“æœ
+	 * @return è¿”å›Tç±»å‹çš„å¯¹è±¡
+	 */
 	public T getResult(){
 		Session s = null;  
         Transaction t = null;
@@ -35,7 +38,8 @@ public abstract class AbSessionHelper <T> {
         	}
 	        err.printStackTrace(); 
 	        Bog.fetal("<handlerTransaction>"+t+ "<Exception>"+err.getMessage());
-        }finally{  
+        }finally{
+        	if ( s != null) 	
         	s.close();  
         }
         return result;

@@ -15,7 +15,7 @@ public class QueryParamsHelper {
 		params = new ArrayList<QueryHolder>();
 	}
 	
-	public void add(String type,String name,String value){
+	public void add(String type,String name,Object value){
 		QueryHolder p = new QueryHolder();
 		p.queryType = type;
 		p.queryValue = value;
@@ -47,6 +47,6 @@ public class QueryParamsHelper {
 	class QueryHolder{
 		String queryType;
 		String queryColumnName;
-		String queryValue;
+		Object queryValue;
 	}
 }

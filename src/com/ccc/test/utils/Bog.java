@@ -6,7 +6,7 @@ import org.apache.log4j.PropertyConfigurator;
 public class Bog {
 
 	public static boolean DEBUG = true;
-	static String logger_property = Bog.class.getClassLoader().getResource("/").getPath().replace("%20", " ")+"log4j.properties";
+	static String logger_property = Bog.class.getClassLoader().getResource("/").getPath().replace("%20", " ")+"config/log4j.properties";
 	static Logger mLogger = Logger.getLogger(Bog.class);
 	static boolean hadLoadProperty = false;
 	
