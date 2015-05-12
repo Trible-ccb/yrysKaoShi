@@ -1,9 +1,8 @@
-package com.ccc.test.hibernate.dao;
+package com.ccc.test.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import com.ccc.test.hibernate.HibernateSessionFactory;
 import com.ccc.test.utils.Bog;
 
 /**
@@ -20,10 +19,11 @@ public abstract class AbSessionHelper <T> {
 	 */
 	public abstract T handleSession(Session s);
 	
+	
 	/**获取操作Session后的结果
 	 * @return 返回T类型的对象
 	 */
-	public T getResult(){
+	public T getResult()  throws Exception {
 		Session s = null;  
         Transaction t = null;
         T result = null;
@@ -36,8 +36,8 @@ public abstract class AbSessionHelper <T> {
         	if ( t != null ){
         		t.rollback();  
         	}
-	        err.printStackTrace(); 
 	        Bog.fetal("<handlerTransaction>"+t+ "<Exception>"+err.getMessage());
+	        throw new Exception(err);
         }finally{
         	if ( s != null) 	
         	s.close();  

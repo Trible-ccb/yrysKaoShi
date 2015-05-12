@@ -16,7 +16,6 @@ import com.ccc.test.pojo.UserInfo;
 import com.ccc.test.service.interfaces.IUserService;
 import com.ccc.test.utils.GlobalValues;
 import com.ccc.test.utils.ListUtil;
-import com.ccc.test.utils.SecurityMethod;
 
 //代表控制层
 @Controller
@@ -26,6 +25,7 @@ public class UserController {
 
 	@Autowired
 	IUserService userService;
+	SimpleHandleException she = new SimpleHandleException();
 	
 	/**用户注册时调用
 	 * @param username
@@ -47,20 +47,28 @@ public class UserController {
 				|| ListUtil.isEmpty(password)
 				|| ListUtil.isEmpty(con_password)
 				|| ListUtil.isEmpty(usertype) 
-				|| !password.equals(con_password) ){
-			model.addAttribute("result","注册信息输入有误");
-			return "main";
-		}
-		UserInfo t = new UserInfo();
-		String md5psw = SecurityMethod.encryptMD5(SecurityMethod.encryptMD5(password));
-		t.setPassword(md5psw);
-		t.setUsername(username);
-		t.setType(usertype);
-		Serializable id = userService.add(t);
-		if ( id instanceof Integer && (Integer)id < 0 ){
-			model.addAttribute("result","注册失败，请重新输入。");
+				){
+			model.addAttribute("result","注册信息不能为空！");
+		} else if( !password.equals(con_password) ){
+			model.addAttribute("result","两次密码不匹配！");
 		} else {
-			model.addAttribute("result","恭喜你，注册成功，请登录。");
+			
+			try {
+				Serializable id = userService.register(username, password, con_password, usertype);
+				if ( id instanceof Integer ){
+					Integer uid = (Integer) id;
+					if( uid == -1 ){
+						model.addAttribute("result","注册失败，用户名已经被注册！");
+					} else if ( uid > 0 ){
+						model.addAttribute("result","恭喜你，注册成功，请登录！");
+					}
+				} else {
+					model.addAttribute("result","未知错误，请重新注册！");
+				}
+			} catch (Exception e) {
+				she.handle(e, model);
+			}
+
 		}
 		return "main";
 	}
@@ -79,15 +87,29 @@ public class UserController {
 			String password,
 			String usertype,
 			ModelMap model){
-		String tokenid = userService.login(username, password,usertype);
-		UserInfo user = userService.fetchUserInfo(tokenid);
-		if ( user == null ){
-			model.addAttribute("result", "用户名或密码错误");
+		
+		if ( ListUtil.isEmpty(username)
+				|| ListUtil.isEmpty(password)
+				|| ListUtil.isEmpty(usertype) 
+				){
+			model.addAttribute("result","输入不能为空！");
 			return "main";
 		}
-		//addAttribute 值不能为空
-		model.addAttribute(GlobalValues.SESSION_USER,user);
-		return "userinfo";
+		try {
+			String tokenid = userService.login(username, password,usertype);
+			UserInfo user = userService.fetchUserInfo(tokenid);
+			if ( user == null ){
+				model.addAttribute("result", "用户名与密码不匹配！");
+				return "main";
+			}
+			//addAttribute 值不能为空
+			model.addAttribute(GlobalValues.SESSION_USER,user);
+			return "userinfo";
+		} catch (Exception e) {
+			she.handle(e, model);
+			return "main";
+		}
+
 	}
 	
 	/**用户登出调用

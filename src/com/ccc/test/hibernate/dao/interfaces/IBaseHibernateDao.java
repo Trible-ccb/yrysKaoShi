@@ -12,35 +12,35 @@ public interface IBaseHibernateDao <T>{
 	 * @param id 根据id获取对象
 	 * @return
 	 */
-	public abstract T getById(Serializable id);
+	public abstract T getById(Serializable id)  throws Exception ;
 	
 	/**根据属性值获取对象列表
 	 * @param args 参数key为数据库列表名，参数value为属性值
 	 * @return 返回对象列表
 	 */
-	public abstract List<T> getList(Map<String, Object> args);
+	public abstract List<T> getList(Map<String, Object> args)  throws Exception;
 	
 	/**
 	 * @param t 删除对象
 	 * @return 成功返回true 否则返回false
 	 */
-	public abstract boolean delete(T t);
+	public abstract boolean delete(T t)  throws Exception;
 	
 	/**
 	 * @param list 批量删除对象
 	 * @return
 	 */
-	public abstract boolean deleteAll(List<T> list);
+	public abstract boolean deleteAll(List<T> list)  throws Exception;
 	
 	/**
 	 * @param t 更新对象
 	 * @return
 	 */
-	public abstract boolean update(T t);
+	public abstract boolean update(T t)  throws Exception;
 	
 	/**
 	 * @param t 添加对象
 	 * @return
 	 */
-	public abstract Serializable add(T t);
+	public abstract Serializable add(T t)  throws Exception;
 }

@@ -2,7 +2,7 @@ body{
 	background:  #f1f5f8 url(../img/bg.png) center 0 no-repeat
 }
 .content{
-	height: 520px;
+	height: 540px;
 	width: 1366px;
 	
 }
@@ -11,8 +11,13 @@ body{
 	height: 500px;
 	width: 380px;
 	text-align: right;
-	margin-top: 40px;
-
+	margin-top: 10px;
+}
+#input_tip{
+	text-align: center;
+	padding-bottom: 10px;
+	margin-top:10px;
+	color: red;
 }
 
 .accordion_section{
@@ -25,11 +30,17 @@ body{
 	margin-bottom: 20px;
 	margin-right: 10px;
 }
-fieldset select {
-      width: 90px;
+.reg_login_box fieldset{
+	margin-right: 68px;
+	text-align: center;
 }
+
+fieldset select {
+      width: 120px;
+}
+
 input[type="submit"]{
-	width: 120px;
+	width: 196px;
 	background: #80C3F7;
 }
 .login_box{

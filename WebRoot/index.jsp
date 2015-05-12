@@ -32,7 +32,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  		$(function() {
  	    	$( "#tomain" ).button();
  			$( "#tabs" ).tabs();
+ 			var tips = $("#dialog_content").text();
+ 			alert(tips);
+ 			if (tips != ''){
+ 				$("#dialog").dialog();
+ 			}
  	  	});
+ 		
 	</script>
   </head>
 	  
@@ -61,6 +67,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <a href="hello.do">hello2</a>
     <a href="html/addUser.html">注册用户</a>
     <a href="jsp/main" id="tomain">看主页</a>
-
+		<div id="dialog" class="dialog" title="提示！">
+			<p id="dialog_content">顶点度dd </p>
+		</div>
 </body>
 </html>

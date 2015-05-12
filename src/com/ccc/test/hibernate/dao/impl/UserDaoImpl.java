@@ -10,8 +10,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import com.ccc.test.hibernate.AbSessionHelper;
 import com.ccc.test.hibernate.QueryParamsHelper;
-import com.ccc.test.hibernate.dao.AbSessionHelper;
 import com.ccc.test.hibernate.dao.interfaces.IBaseHibernateDao;
 import com.ccc.test.pojo.UserInfo;
 import com.ccc.test.utils.ListUtil;
@@ -21,9 +21,8 @@ import com.ccc.test.utils.ListUtil;
 public class UserDaoImpl implements IBaseHibernateDao<UserInfo>{
 
 	@Override
-	public UserInfo getById(final Serializable id) {
+	public UserInfo getById(final Serializable id) throws Exception {
 		return new AbSessionHelper<UserInfo>() {
-
 			@Override
 			public UserInfo handleSession(Session s) {
 				return (UserInfo) s.get(UserInfo.class, id);
@@ -33,7 +32,7 @@ public class UserDaoImpl implements IBaseHibernateDao<UserInfo>{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<UserInfo> getList(final Map<String, Object> args) {
+	public List<UserInfo> getList(final Map<String, Object> args)  throws Exception {
 		if ( ListUtil.isEmpty(args))return null;
 		return new AbSessionHelper<List<UserInfo>>() {
 			@Override
@@ -52,13 +51,13 @@ public class UserDaoImpl implements IBaseHibernateDao<UserInfo>{
 	}
 
 	@Override
-	public boolean delete(UserInfo t) {
+	public boolean delete(UserInfo t)  throws Exception {
 //		hibernateTemplate.delete(t);
 		return true;
 	}
 
 	@Override
-	public boolean deleteAll(List<UserInfo> list) {
+	public boolean deleteAll(List<UserInfo> list)  throws Exception{
 		if ( list == null )return false;
 		for ( UserInfo info : list ){
 			delete(info);
@@ -67,13 +66,13 @@ public class UserDaoImpl implements IBaseHibernateDao<UserInfo>{
 	}
 
 	@Override
-	public boolean update(UserInfo t) {
+	public boolean update(UserInfo t)  throws Exception{
 //		hibernateTemplate.update(t);
 		return true;
 	}
 
 	@Override
-	public Serializable add(final UserInfo t) {
+	public Serializable add(final UserInfo t)  throws Exception{
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put(UserInfo.USERINFO_COLUMN_USER_NAME, t.getUsername());
 		List<UserInfo> checkExist = getList(args);

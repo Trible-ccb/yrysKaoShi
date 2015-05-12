@@ -17,29 +17,71 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 	<meta http-equiv="description" content="This is my page"> -->
 	<link rel="stylesheet" type="text/css" href="./css/globe.css">
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
-	<link rel="stylesheet" type="text/css" href="./css/jquery-ui.min.css">
-	<link rel="stylesheet" type="text/css" href="./css/jquery-ui.structure.min.css">
-	<link rel="stylesheet" type="text/css" href="./css/jquery-ui.theme.min.css">
-  	<script src="./js/jquery-1.11.3.min.js"></script>
-  	<script src="./js/jquery-ui.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="./css/jquery-ui.structure.css">
+	<link rel="stylesheet" type="text/css" href="./css/jquery-ui.theme.css">
+  	<script src="./js/jquery-1.11.3.js"></script>
+  	<script src="./js/jquery-ui.js"></script>
   	
   	<script>
  	  $(function() {
-		$( "#accordion" ).accordion();
-		$( document ).tooltip();
-		$(input).autocomplete();
-		$("input[type=submit]").button();
-		$( ".accordion_section" ).position({
-			of: $( "#accordion" ),
-			my: "center center",
-			at: "center center",
-			collision: "flip flip"
-		});
-		$( "#usertype" ).selectmenu();
-		var tips = $(".dialog p").val();
+ 		function showInputTip(tip){
+ 			$( "#input_tip" )
+ 			.text( tip ).show()
+ 			.fadeOut(5000,function(){
+ 				$(this).html("&nbsp").show();
+ 			})
+ 		}
+ 		$("input[title]").tooltip();
+		var tips = $("#dialog_content").text();
 		if (tips != ''){
-			$(".dialog").dialog();
-		}
+			$("#dialog_mask").addClass("dialog_mask");
+			$("#dialog").dialog({
+				close:function(){
+					$("#dialog_mask").removeClass("dialog_mask");
+				}
+			});
+		} else {
+			$("#dialog_mask").removeClass("dialog_mask");
+		} 
+		$( "#accordion" ).accordion();
+		$("input[type=submit]").button();
+		$( "fieldset select" ).selectmenu();
+		
+		var input_tip_text = '';
+		$("#login_form").submit(function(event){
+			var name = $("#login_username").val();
+			var psw = $("#login_password").val();
+			if ( name != '' && psw != '' ){
+				return;
+			}
+			if ( name == '' ){
+				input_tip_text = '用户名不能为空!';
+			} else if ( psw == '' ){
+				input_tip_text = '密码不能为空!';
+			}
+			showInputTip(input_tip_text);
+			event.preventDefault();
+		});
+		$("#reg_form").submit(function(event){
+			var name = $("#reg_username").val();
+			var psw = $("#reg_password").val();
+			var cpsw = $("#con_password").val();
+			if ( name != '' && psw != '' && cpsw != '' && psw == cpsw){
+				return;
+			}
+			if ( name == '' ){
+				input_tip_text = '用户名不能为空!';
+			} else if ( psw == '' ){
+				input_tip_text = '密码不能为空!';
+			} else if ( psw != cpsw ){
+				input_tip_text = '两次密码不一致!';
+			}
+			showInputTip(input_tip_text);
+			event.preventDefault();
+		});
+		
+		$(input).autocomplete();
  	  });
    </script>
   </head>
@@ -51,21 +93,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<label class="header_name">个性化在线考试系统</label>
 		</div>
 		<div class="reg_login_box">
+			<p id="input_tip">&nbsp</p>
 			<div id="accordion">
 			  <h3 class="accordion_section">用户登录</h3>
 			  <div id="login_tab">
-			    <form action="user/login.do" method="post">
-			    	<label for="#login_username">用户名:</label>
-			  		<input id="login_username" name="username" title="用户名最长20字符。" />
+			    <form action="user/login.do" method="post" id="login_form">
+			    	<label for="#login_username">用户名：</label>
+			  		<input id="login_username" name="username"  />
 			  		<br/>
-			  		<label for="#login_password">密码:</label>
-					<input id="login_password" name="password" type="password"/>
+			  		<label for="#login_password">密　码：</label>
+					<input id="login_password" name="password" type="password" />
 					<br/>
 					<fieldset>
-					    <label for="usertype">选择用户身份</label>
-					    <select name="usertype" id="usertype">
+					    <label for="usertype">身　份：</label>
+					    <select name="usertype" id="login_usertype">
 					      <option>学生</option>
 					      <option>老师</option>
+					      <option>管理员</option>
 					    </select>
 					</fieldset>
 					<input type="submit" value="登录" id="submit_login"/>
@@ -73,19 +117,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  </div>
 			  <h3 class="accordion_section">注册用户</h3>
 			  <div id="reg_tab">
-  			    <form action="user/register.do" method="post">
-  			    	<label for="#reg_username">用户名:</label>
-			  		<input id="reg_username" name="username" />
+  			    <form action="user/register.do" method="post" id="reg_form">
+  			    	<label for="#reg_username">用户名：</label>
+			  		<input id="reg_username" name="username"  />
 			  		<br/>
-			  		<label for="#reg_password">密码:</label>
-					<input id="reg_password" name="password" type="password"/>
+			  		<label for="#reg_password">密　码：</label>
+					<input id="reg_password" name="password" type="password" title="密码长度6-20个字符"/>
 					<br/>
 					<label for="#con_password">确认密码:</label>
 					<input id="con_password" name="con_password" type="password"/>
 					<br/>
 					<fieldset>
-					    <label for="usertype">选择用户身份</label>
-					    <select name="usertype" id="usertype">
+					    <label for="usertype">身　份：</label>
+					    <select name="usertype" id="reg_usertype">
 					      <option>学生</option>
 					      <option>老师</option>
 					    </select>
@@ -95,8 +139,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  </div>
 			</div>
 		</div>
-		<div class="dialog" title="提示！">
-			<p>${result}</p>
+	</div>
+	<div class="dialog_mask" id="dialog_mask" >
+		<div id="dialog" class="dialog" title="提示！">
+			<p id="dialog_content">${result}</p>
 		</div>
 	</div>
 </body>

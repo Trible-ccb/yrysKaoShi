@@ -10,35 +10,35 @@ public interface IBaseService <T>{
 	 * @param id 对象的id
 	 * @return T的实例
 	 */
-	T getById(Serializable id);
+	T getById(Serializable id)  throws Exception ;
 	
 	/**获取一组T的对象
 	 * @param arg 获取参数
 	 * @return 返回一组T对象
 	 */
-	List<T> getList(Map<String, Object> args);
+	List<T> getList(Map<String, Object> args) throws Exception ;
 	
 	/**删除对象T
 	 * @param t 要删除的对象
 	 * @return 删除成功返回true，否则false；
 	 */
-	boolean delete(T t);
+	boolean delete(T t)  throws Exception ;
 	
 	/**删除的对象列表
 	 * @param list 要删除的对象列表
 	 * @return 删除成功返回true，否则false；
 	 */
-	boolean deleteAll(List<T> list);
+	boolean deleteAll(List<T> list)  throws Exception ;
 	
 	/**更新对象
 	 * @param t 需要更新的对象
 	 * @return 成功返回true，否则false；
 	 */
-	boolean update(T t);
+	boolean update(T t)  throws Exception;
 	
 	/**添加对象
 	 * @param t 需要添加的对象
 	 * @return 成功返回对象id，否则null；
 	 */
-	Serializable add(T t);
+	Serializable add(T t)  throws Exception;
 }
