@@ -41,8 +41,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  			<input type="button" value="搜索"/>
 	  		</div>
 	  		<div class="nav_bar">
-	  			<a href="#">消息</a>
-	  			<a href="#">设置</a>
+	  			<div class="nav_bar_box">
+	  				<a href="#">消息</a>
+	  				<a href="#">设置</a>
+	  			</div>
 	  		</div>
   		</div>
   	</div>

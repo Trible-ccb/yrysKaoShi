@@ -17,7 +17,7 @@ body{
 }
 #stu_header .logo{
 	
-	width: 190px;
+	width: 144px;
 	height: 50px;
 	float: left;
 	margin-left: 30px;
@@ -26,6 +26,7 @@ body{
 	width: 48px;
 	height: 48px;
 }
+
 #stu_header .search_bar{
 	float: left;
 	width: auto;
@@ -50,8 +51,14 @@ body{
 	float: right;
 	margin-left: -10px;
 	margin-right: 10px;
+	width: auto;
+	height: auto;
+	
 }
-
+.nav_bar .nav_bar_box{
+	margin: 0 auto;
+	margin-top: 10px;
+}
 #stu_center{
 	min-height: 540px;
 	width: 1000px;
@@ -64,7 +71,6 @@ body{
 }
 #stu_center #content{
 	width: 85%;
-	
 }
 
 fieldset select {
