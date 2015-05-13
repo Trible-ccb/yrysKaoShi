@@ -39,6 +39,7 @@ a {
 	height: 60px;
 	line-height : 60px;
 	width: 100%;
+	display: inline-block;
 }
 .header_name{
 	color: white;

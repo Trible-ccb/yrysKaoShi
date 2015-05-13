@@ -1,0 +1,86 @@
+body{
+	background:  #f1f5f8 url(../img/bg.png) center 0 no-repeat
+}
+
+#stu_header{
+	z-index: 9999;
+	height: 50px;
+	width:100%;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background: #fff;
+	border-top: 2px solid red;
+}
+.stu_header_box{
+	margin: 0 auto;
+}
+#stu_header .logo{
+	
+	width: 190px;
+	height: 50px;
+	float: left;
+	margin-left: 30px;
+}
+#stu_header .logo img{
+	width: 48px;
+	height: 48px;
+}
+#stu_header .search_bar{
+	float: left;
+	width: auto;
+	height: auto;
+}
+.search_input{
+	width:250px;
+	padding: 4px 33px 4px 10px;
+	margin-top:10px;
+	height: 30px;
+	line-height: 30px;
+	box-shadow: none;
+	background-color: #f2f2f5;
+	border: 1px solid #ccc;
+	color: #808080;
+	outline-style: none;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#stu_header .nav_bar{
+	float: right;
+	margin-left: -10px;
+	margin-right: 10px;
+}
+
+#stu_center{
+	min-height: 540px;
+	width: 1000px;
+	background: blue;
+}
+#stu_center #left_nav{
+	
+	width: 15%;
+	text-decoration: none;
+}
+#stu_center #content{
+	width: 85%;
+	
+}
+
+fieldset select {
+      width: 120px;
+}
+
+input[type="submit"]{
+	width: 196px;
+	background: #80C3F7;
+}
+.login_box{
+	height: 100%;
+	width: 100%;
+}
+
+.reg_box{
+	height: 100%;
+	width: 100%;
+}
